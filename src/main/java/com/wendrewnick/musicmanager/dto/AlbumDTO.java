@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AlbumDTO {
-    
+
     private UUID id;
 
     @NotBlank(message = "Title is required")
@@ -30,7 +30,6 @@ public class AlbumDTO {
     @NotNull(message = "Artist ID is required")
     private UUID artistId;
 
-    // Response only
     private String artistName;
     private String coverUrl;
 }

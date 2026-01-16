@@ -29,6 +29,13 @@ public class RateLimitFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+        String requestURI = request.getRequestURI();
+        if (requestURI.startsWith("/swagger-ui") || requestURI.startsWith("/v3/api-docs")
+                || requestURI.startsWith("/api-docs")) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
+
         String ip = request.getRemoteAddr();
         // Simple IP-based rate limiting for now.
 
@@ -43,10 +50,10 @@ public class RateLimitFilter implements Filter {
     }
 
     private Bucket createNewBucket(String key) {
-        // 10 requests per minute
+        // 50 requests per minute to allow Swagger UI to load assets
         Bandwidth limit = Bandwidth.builder()
-                .capacity(10)
-                .refillGreedy(10, Duration.ofMinutes(1))
+                .capacity(50)
+                .refillGreedy(50, Duration.ofMinutes(1))
                 .build();
         return Bucket.builder()
                 .addLimit(limit)
