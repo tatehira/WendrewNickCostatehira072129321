@@ -8,6 +8,7 @@
 
 ## 📌 Visão Geral
 
+<<<<<<< HEAD
 Este projeto é uma **API RESTful** desenvolvida em **Java + Spring Boot** para resolver o desafio de gerenciamento de catálogo musical. 
 Ele implementa padrões de mercado para garantir escalabilidade, segurança e manutenibilidade, servindo como uma base sólida para sistemas corporativos.
 
@@ -70,6 +71,9 @@ src/main/java/com/wendrewnick/musicmanager
 ## 🚀 Como Executar (Guia Passo-a-Passo)
 
 Pré-requisito único: **Docker** instalado e rodando. Nada mais.
+=======
+Escolha seu sistema operacional e o método de instalação preferido.
+>>>>>>> 91f63b293ae54e4f9998e20c9caad4fae9faf7ca
 
 ### 🪟 Windows
 
