@@ -1,82 +1,77 @@
 # Music Manager API
 
-## Visão Geral
-A **Music Manager API** é uma API REST desenvolvida em **Java com Spring Boot**, voltada para o gerenciamento de **Artistas** e **Álbuns**.  
-O projeto foi construído com foco em **qualidade de código**, **segurança**, **organização arquitetural** e **boas práticas corporativas**, conforme exigido no edital do processo seletivo.
+## 🎵 Sobre o Projeto
+A **Music Manager API** é um sistema profissional para gerenciamento de Artistas e Álbuns.
+O foco deste projeto é **simplicidade de execução** aliada a uma **arquitetura robusta** (Java, Spring Boot, Docker).
 
-A aplicação permite o cadastro, edição, listagem e remoção de artistas e seus respectivos álbuns, incluindo **upload de imagens de capa** para armazenamento em Object Storage (**MinIO**) e a geração de **URLs assinadas (Presigned URLs)** para acesso seguro às imagens.
+---
 
-## Arquitetura Adotada
-O projeto segue uma **Arquitetura em Camadas (Layered Architecture)**, promovendo separação de responsabilidades, manutenibilidade e facilidade de testes.
+## 🚀 Como Executar (Guia Passo-a-Passo)
 
-### Camadas
-- **Controller**  
-  Responsável por expor os endpoints REST, receber requisições HTTP e validar os dados de entrada e saída por meio de DTOs.
+Preparamos instaladores automáticos para facilitar sua vida. Escolha seu sistema operacional abaixo:
 
-- **Service**  
-  Contém a lógica de negócio da aplicação, regras, validações e orquestração das operações.
+### 🪟 Windows
 
-- **Repository**  
-  Camada de persistência de dados, utilizando **Spring Data JPA** para abstração do acesso ao banco.
+#### Opção 1: Instalação Automática (Recomendada)
+Ideal para quem quer praticidade. O script verificará se você tem o Docker instalado e configurará tudo sozinho.
 
-- **Entity (Domínio)**  
-  Representa o modelo de dados e o mapeamento objeto-relacional (ORM) das tabelas do banco.
+1. Abra a pasta do projeto.
+2. Dê dois cliques no arquivo **`Instalar.bat`**.
+3. Se solicitado, aceite a permissão de Administrador.
+4. Aguarde o processo finalizar. Uma janela preta mostrará o progresso.
+5. Ao final, o navegador abrirá automaticamente com o sistema pronto.
 
-### Padrões e Princípios Utilizados
-- DTO (Data Transfer Object)
-- Repository Pattern
-- Dependency Injection (Spring IoC)
-- Princípios SOLID
-- Separação de responsabilidades
+> **Nota:** Se você não tiver o Docker instalado, o script perguntará se deseja instalar. Digite `S` e enter.
 
-## Tecnologias Utilizadas
-- Java 17 (LTS)
-- Spring Boot 3.2.2
-- PostgreSQL
-- Flyway
-- MinIO
-- Spring Security + JWT
-- Bucket4j
-- Docker & Docker Compose
-- Swagger / OpenAPI
-- Lombok
-- JUnit 5 & Mockito
+#### Opção 2: Instalação Manual
+Caso prefira fazer do seu jeito:
 
-## Pré-requisitos
-- Docker e Docker Compose instalados  
-- (Opcional) Java 17+ e Maven
+1. Baixe e instale o [Docker Desktop para Windows](https://www.docker.com/products/docker-desktop).
+2. Abra o Docker Desktop e espere ele iniciar.
+3. Abra o terminal (PowerShell ou CMD) na pasta do projeto.
+4. Execute:
+   ```powershell
+   docker compose up -d --build
+   ```
+5. Acesse: `http://localhost:8080/swagger-ui.html`
 
-## Como Executar o Projeto
+---
 
-### Com Docker
-```bash
-docker compose up --build
-```
+### 🐧 Linux
 
-API disponível em:
-```
-http://localhost:8080
-```
+#### Opção 1: Instalação Automática (Recomendada)
+1. Abra o terminal na pasta do projeto.
+2. Dê permissão de execução ao script:
+   ```bash
+   chmod +x install.sh
+   ```
+3. Execute o instalador:
+   ```bash
+   ./install.sh
+   ```
+4. O script verificará o Docker e subirá o sistema.
 
-### Execução Local
-```bash
-docker compose up postgres minio createbuckets -d
-./mvnw spring-boot:run
-```
+#### Opção 2: Instalação Manual
+1. Certifique-se de ter o Docker e o Docker Compose instalados na sua distribuição.
+2. Execute no terminal:
+   ```bash
+   docker compose up -d --build
+   ```
 
-## Documentação
-Swagger disponível em:
-```
-http://localhost:8080/swagger-ui.html
-```
+---
 
-## Autenticação
-Usuário padrão:
-- username: admin
-- password: admin
+## 🛠️ Tecnologias
+- **Java 17 & Spring Boot 3**: O coração da aplicação.
+- **PostgreSQL**: Banco de dados robusto.
+- **MinIO**: Armazenamento de imagens (compatível com S3).
+- **Docker**: Para garantir que funcione em qualquer máquina.
+- **Flyway**: Migrações de banco de dados seguras.
 
-## Upload de Imagens
-As imagens são armazenadas no MinIO e acessadas via URLs assinadas com validade de 30 minutos.
+## 📚 Documentação (API)
+Após iniciar, a documentação completa dos endpoints estará disponível em:
+👉 **[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)**
 
-## Considerações Finais
-Projeto desenvolvido com foco em clareza, organização e aderência total ao edital.
+## 👤 Login Padrão
+Para testar os endpoints protegidos:
+- **Usuário:** `admin`
+- **Senha:** `admin`
