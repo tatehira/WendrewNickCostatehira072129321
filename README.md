@@ -8,7 +8,6 @@ O foco deste projeto é **simplicidade de execução** aliada a uma **arquitetur
 
 ## 🚀 Guia de Instalação e Execução
 
-<<<<<<< HEAD
 Escolha seu sistema operacional e o método de instalação preferido.
 
 ### 🪟 Windows
