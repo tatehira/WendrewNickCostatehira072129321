@@ -1,5 +1,6 @@
 package com.wendrewnick.musicmanager.controller;
 
+import com.wendrewnick.musicmanager.dto.ApiResponse;
 import com.wendrewnick.musicmanager.dto.ArtistDTO;
 import com.wendrewnick.musicmanager.service.ArtistService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,31 +27,36 @@ public class ArtistController {
 
     @Operation(summary = "Listar todos os artistas", description = "Suporta paginação e filtro por nome")
     @GetMapping
-    public ResponseEntity<Page<ArtistDTO>> getAllArtists(
+    public ResponseEntity<ApiResponse<Page<ArtistDTO>>> getAllArtists(
             @RequestParam(required = false) String name,
             Pageable pageable) {
-        return ResponseEntity.ok(artistService.findAll(name, pageable));
+        Page<ArtistDTO> page = artistService.findAll(name, pageable);
+        return ResponseEntity.ok(ApiResponse.success(page, "Artistas recuperados com sucesso"));
     }
 
     @Operation(summary = "Buscar artista por ID")
     @GetMapping("/{id}")
-    public ResponseEntity<ArtistDTO> getArtistById(@PathVariable UUID id) {
-        return ResponseEntity.ok(artistService.findById(id));
+    public ResponseEntity<ApiResponse<ArtistDTO>> getArtistById(@PathVariable UUID id) {
+        ArtistDTO dto = artistService.findById(id);
+        return ResponseEntity.ok(ApiResponse.success(dto, "Artista encontrado"));
     }
 
     @Operation(summary = "Criar um novo artista")
     @PostMapping
-    public ResponseEntity<ArtistDTO> createArtist(
+    public ResponseEntity<ApiResponse<ArtistDTO>> createArtist(
             @Valid @RequestBody ArtistDTO artistDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(artistService.create(artistDTO));
+        ArtistDTO created = artistService.create(artistDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success(created, "Artista criado com sucesso"));
     }
 
     @Operation(summary = "Atualizar um artista")
     @PutMapping("/{id}")
-    public ResponseEntity<ArtistDTO> updateArtist(
+    public ResponseEntity<ApiResponse<ArtistDTO>> updateArtist(
             @PathVariable UUID id,
             @Valid @RequestBody ArtistDTO artistDTO) {
-        return ResponseEntity.ok(artistService.update(id, artistDTO));
+        ArtistDTO updated = artistService.update(id, artistDTO);
+        return ResponseEntity.ok(ApiResponse.success(updated, "Artista atualizado com sucesso"));
     }
 
     @Operation(summary = "Deletar um artista")
