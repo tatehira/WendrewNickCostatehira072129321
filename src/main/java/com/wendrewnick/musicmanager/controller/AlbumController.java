@@ -1,5 +1,6 @@
 package com.wendrewnick.musicmanager.controller;
 
+import com.wendrewnick.musicmanager.dto.ApiResponse;
 import com.wendrewnick.musicmanager.dto.AlbumDTO;
 import com.wendrewnick.musicmanager.service.AlbumService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,24 +31,28 @@ public class AlbumController {
 
     @Operation(summary = "Listar todos os álbuns", description = "Suporta paginação e filtro por título")
     @GetMapping
-    public ResponseEntity<Page<AlbumDTO>> getAllAlbums(
+    public ResponseEntity<ApiResponse<Page<AlbumDTO>>> getAllAlbums(
             @RequestParam(required = false) String title,
             Pageable pageable) {
-        return ResponseEntity.ok(albumService.findAll(title, pageable));
+        Page<AlbumDTO> page = albumService.findAll(title, pageable);
+        return ResponseEntity.ok(ApiResponse.success(page, "Álbuns recuperados com sucesso"));
     }
 
     @Operation(summary = "Buscar álbum por ID")
     @GetMapping("/{id}")
-    public ResponseEntity<AlbumDTO> getAlbumById(@PathVariable UUID id) {
-        return ResponseEntity.ok(albumService.findById(id));
+    public ResponseEntity<ApiResponse<AlbumDTO>> getAlbumById(@PathVariable UUID id) {
+        AlbumDTO dto = albumService.findById(id);
+        return ResponseEntity.ok(ApiResponse.success(dto, "Álbum encontrado"));
     }
 
     @Operation(summary = "Criar um novo álbum", description = "Upload de imagem e dados")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<AlbumDTO> createAlbum(
+    public ResponseEntity<ApiResponse<AlbumDTO>> createAlbum(
             @Parameter(description = "Dados do álbum", content = @Content(mediaType = "application/json")) @RequestPart("data") @Valid AlbumDTO albumDTO,
             @RequestPart(value = "image", required = false) MultipartFile image) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(albumService.create(albumDTO, image));
+        AlbumDTO created = albumService.create(albumDTO, image);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success(created, "Álbum criado com sucesso"));
     }
 
     @Operation(summary = "Deletar um álbum")
