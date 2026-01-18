@@ -137,5 +137,5 @@ O sistema cria automaticamente um usuário administrador na primeira execução:
 ---
 
 <p align="center">
-  <i>Desenvolvido por Wendrew Nick Costa Tehira</i>
+  <i>Desenvolvido por Wendrew Nick Costa Tatehira</i>
 </p>
