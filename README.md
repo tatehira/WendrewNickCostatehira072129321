@@ -125,6 +125,7 @@ O sistema cria automaticamente um usuário administrador na primeira execução:
 3.  **Rate Limiting:** Eu implementei um filtro de Servlet (Bucket4j) para proteger a API de abusos, garantindo disponibilidade mesmo sob carga.
 4.  **Installer Scripts:** Eu criei scripts de inicialização (`.bat`/`.sh`) para abstrair a complexidade do Docker Compose para avaliadores ou usuários menos técnicos.
 5.  **Padronização de API:** Respostas de sucesso seguem um envelope padrão (`ApiResponse`), enquanto erros utilizam o padrão RFC 7807 (`ProblemDetail`) para máxima interoperabilidade.
+6.  **Auditoria Automática:** Todas as entidades possuem rastreamento automático de criação e modificação (`createdAt`, `updatedAt`) via JPA Auditing.
 
 ---
 
